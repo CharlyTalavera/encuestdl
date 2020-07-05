@@ -1,6 +1,7 @@
 import 'encuestdl.dart';
 import 'controller/question_controller.dart';
 import 'controller/poll_controller.dart';
+import 'controller/submit_controller.dart';
 
 /// This type initializes an application.
 ///
@@ -60,6 +61,12 @@ class EncuestdlChannel extends ApplicationChannel {
     router
       .route("/poll/:id")
       .link(() => PollController(context));
+
+    router
+      .route('poll/:pollId/submits')
+      .link(() => PollSubmitController(context));
+
+
     return router;
   }
 }
