@@ -15,15 +15,22 @@ class PollController extends ResourceController {
 
     final polls = await pollQuery.fetch();
 
+    for(final poll in polls)
+      for(final question in poll.questions)
+        question.correct = 0; 
     return Response.ok(polls);
   }
 
   @Operation.get('id')
   Future<Response> getByID(@Bind.path('id') int id) async {
     final pollQuery = Query<Poll>(context)
-      ..where((p) => p.id).equalTo(id);    
+      ..where((p) => p.id).equalTo(id)
+      ..join(set: (p) => p.questions);    
 
     final poll = await pollQuery.fetchOne();
+    
+    for(final question in poll.questions)
+      question.correct = 0; 
 
     if (poll == null) {
       return Response.notFound();
