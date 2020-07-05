@@ -33,10 +33,16 @@ class QuestionController extends ResourceController {
       final Map<String, dynamic> body = await request.body.decode();
       if(body['value']?.isEmpty?? true)
         Response.badRequest(body: {"error": "Missing required param 'value'"});
-      print(body['value']);
+      if(body['correct']?.isEmpty?? true)
+        Response.badRequest(body: {"error": "Missing required param 'correct'"});
+      if(body['options']?.isEmpty?? true)
+        Response.badRequest(body: {"error": "Missing required param 'options'"});
+
       final query = Query<Question>(context)
         ..values.value = body['value'][0]
-        ..values.poll.id = int.parse(body['poll'][0]);
+        ..values.poll.id = int.parse(body['poll'][0])
+        ..values.correct = int.parse(body['correct'][0])
+        ..values.options = Document(body['options']);
 
       final insertedQuestion = await query.insert();
 
