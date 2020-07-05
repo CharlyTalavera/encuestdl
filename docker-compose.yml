@@ -1,0 +1,31 @@
+version: '3'
+services:
+  # encuestdl:
+  #   image: google/dart
+  #   command: bash -c "pub get && dart --observe bin/dev.dart"
+  #   working_dir: /app
+  #   ports:
+  #   - "8181:8181"
+  #   - "3000:3000"
+  #   volumes:
+  #     - .:/app
+
+  db:
+    image: "postgres:11"
+    environment:
+      - POSTGRES_PASSWORD=password
+      - POSTGRES_USER=root
+      - POSTGRES_DB=encuestdl
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    network_mode: "host"
+  teste-pgadmin-compose:
+    image: dpage/pgadmin4
+    environment:
+      PGADMIN_DEFAULT_EMAIL: "talaveracarlosd@gmail.com"
+      PGADMIN_DEFAULT_PASSWORD: "password"
+
+    ports:
+      - "16543:80"
