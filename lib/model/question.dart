@@ -10,12 +10,11 @@ class _Question {
   @Column()
   String value;
 
-  @Column()
-  List<String> options;
+  Document options;
 
   @Column()
   int correct;
-  
+
   @Relate(#questions)
   Poll poll;
 }
