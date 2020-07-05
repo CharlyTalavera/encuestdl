@@ -1,5 +1,6 @@
 import 'package:encuestdl/encuestdl.dart';
 import 'question.dart';
+import 'submit.dart';
 
 class Poll extends ManagedObject<_Poll> implements _Poll{}
 
@@ -11,5 +12,7 @@ class _Poll {
   String name;
 
   ManagedSet<Question> questions;
+
+  ManagedSet<Submit> submits;
 
 }
