@@ -1,14 +1,14 @@
 version: '3'
 services:
-  # encuestdl:
-  #   image: google/dart
-  #   command: bash -c "pub get && dart --observe bin/dev.dart"
-  #   working_dir: /app
-  #   ports:
-  #   - "8181:8181"
-  #   - "3000:3000"
-  #   volumes:
-  #     - .:/app
+  encuestdl:
+    build: .
+    command: bash -c "pub get && dart bin/main.dart"
+    working_dir: /app
+    ports:
+    - "8181:8181"
+    - "8888:8888"
+    volumes:
+      - .:/app
 
   db:
     image: "postgres:11"
