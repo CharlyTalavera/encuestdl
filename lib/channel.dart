@@ -63,9 +63,17 @@ class EncuestdlChannel extends ApplicationChannel {
       .link(() => PollController(context));
 
     router
-      .route('poll/:pollId/submits')
-      .link(() => PollSubmitController(context));
+      .route('/submits')
+      .link(() => SubmitController(context));
 
+    router
+      .route('/submit/:id')
+      .link(() => SubmitController(context));
+
+
+    router
+      .route('/poll/:pollId/submits')
+      .link(() => PollSubmitController(context));
 
     return router;
   }
