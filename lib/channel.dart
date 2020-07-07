@@ -23,7 +23,7 @@ class EncuestdlChannel extends ApplicationChannel {
   
     final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
     final persistentStore = PostgreSQLPersistentStore.fromConnectionInfo(
-      "root", "password", "localhost", 5432, "encuestdl");
+      "root", "password", "http://charlytalavera.com", 5432, "encuestdl");
 
     context = ManagedContext(dataModel, persistentStore);
   }
