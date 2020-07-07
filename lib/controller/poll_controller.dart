@@ -17,7 +17,7 @@ class PollController extends ResourceController {
 
     for(final poll in polls)
       for(final question in poll.questions)
-        question.correct = 0; 
+        question.correct = -1; //Don't return correct response to client
     return Response.ok(polls);
   }
 
@@ -29,8 +29,11 @@ class PollController extends ResourceController {
 
     final poll = await pollQuery.fetchOne();
     
+    if(poll == null)
+      return Response.notFound(body: {"error": "The poll id ${id} is invalid"});
+
     for(final question in poll.questions)
-      question.correct = 0; 
+      question.correct = -1; //Don't response correct response to client
 
     if (poll == null) {
       return Response.notFound();
@@ -40,9 +43,10 @@ class PollController extends ResourceController {
 
   @Operation.post()
     Future<Response> createPoll() async {
-      final Map<String, dynamic> body = await request.body.decode();
-      if(body['name']?.isEmpty?? true)
-        Response.badRequest(body: {"error": "Missing required param 'name'"});
+      final Map<String, dynamic> body = await request.body.as();
+
+      if(body == null || body['name']?.isEmpty?? true)
+        return Response.badRequest(body: {"error": "Missing required param 'name'"});
 
       final query = Query<Poll>(context)
         ..values.name = body['name'][0];
