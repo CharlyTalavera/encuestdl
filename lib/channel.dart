@@ -23,7 +23,9 @@ class EncuestdlChannel extends ApplicationChannel {
   
     final dataModel = ManagedDataModel.fromCurrentMirrorSystem();
     final persistentStore = PostgreSQLPersistentStore.fromConnectionInfo(
-      "root", "password", "http://charlytalavera.com", 5432, "encuestdl");
+      "root", "password", "159.89.138.97", 5432, "encuestdl");
+    CORSPolicy.defaultPolicy.allowedOrigins = ["*"];
+    CORSPolicy.defaultPolicy.allowedMethods = ["GET", "POST", "PUT", "PATCH", "OPTIONS"];
 
     context = ManagedContext(dataModel, persistentStore);
   }
