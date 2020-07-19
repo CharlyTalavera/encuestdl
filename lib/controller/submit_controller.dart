@@ -9,6 +9,8 @@ class SubmitController extends ResourceController {
 
   SubmitController(this.context){
     acceptedContentTypes = [ContentType("multipart", "form-data"), ContentType("application", "x-www-form-urlencoded")];
+    policy.allowedMethods = ["GET", "POST", "PUT", "OPTIONS", "PATCH"];
+    
   }
 
   @Operation.get('pollId')
