@@ -6,7 +6,7 @@ class QuestionController extends ResourceController {
   final ManagedContext context;
 
   QuestionController(this.context){
-        acceptedContentTypes = [ContentType("multipart", "form-data"), ContentType("application", "x-www-form-urlencoded")];
+    acceptedContentTypes = [ContentType("multipart", "form-data"), ContentType("application", "x-www-form-urlencoded"), ContentType("application", "json", charset: "utf-8")];
   }
   @Operation.get()
   Future<Response> getAllQuestions() async {
